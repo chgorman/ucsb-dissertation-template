@@ -1,0 +1,97 @@
+\chapter{Conclusion}
+\label{chap:conclusion}
+
+\section{Discussion of Results and Future Directions for MSN}
+
+In this dissertation we investigated the structure of 
+Chebyshev-Vandermonde matrices; by doing so, we were
+able to develop fast algorithms for solving problems
+in interpolation and ordinary differential equation boundary value problems.
+We showed examples and determined that the results were on par
+with many methods as well as, at times, producing more accurate approximations.
+Under certain circumstances, we were able to prove that our methods
+converge to the underlying solution.
+
+There are multiple directions where this work could continue.
+First, we could look into implementing fast algorithms
+in 2D and 3D in order to see there are more advantages with
+MSN over standard Chebyshev interpolation for smooth functions
+or against standard filters for rough functions.
+Additionally, we could implement the ODE BVP fast solver
+using fast algorithms for SSS or HSS matrices.
+From there, we could look into solving 2D and 3D elliptic
+boundary value problems.
+In this case, it will be interesting to see if the methods we used in
+1D variable coefficients here could be extended to 2D and 3D
+variable coefficients.
+The difficulty will come from the fact that in 2D, we will be summing
+tensor products of three terms.
+
+While interpolation on Chebyshev nodes is fast because of the DCT
+and IDCT, this could also hold in general, such as interpolating
+on Legendre nodes using Legendre polynomials as a basis and
+performing MSN in this basis.
+On the other hand, there is still structure in the Gram matrix
+$VD_{s}^{-2}V^{*}$, and it may be possible to invert this quickly
+by converting it into HSS form exactly for certain $s$ values.
+Doing so would require knowledge of structured matrices and solvers,
+but should speed up general interpolation and make it useful.
+It would be interesting to see if this could be used in
+2D interpolation.
+
+
+
+\section{Discussion of Results and Future Directions for
+Randomized Low-Rank Approximations}
+
+In Chapter~\ref{chap:random} we investigated the blocked form of the
+low-rank fixed-precision problem in order to develop a stopping
+criterion useful for relative tolerances down to machine precision.
+We were able to prove asymptotically that this method would
+produce an accurate approximation to the Frobenius norm of a matrix,
+a critical part of the relative stopping criterion.
+The examples showed our method usually produces a sufficient number
+of random samples, though not too many, in order to reach
+the desired 2-norm error.
+
+The stochastic error bound that we developed in the F-norm
+could be improved.
+First, it would be useful to determine if we can find a random variable
+$f(Ax)$ with $\E f(Ax)=\norm{A}_{2}^{\alpha}$ for some power $\alpha$;
+that is, we want to find a way to combine random samplings of the
+range of a matrix in such a way that the expected value of the random
+variable is (some power of) the matrix 2-norm.
+Most, if not all, would prefer to bound the 2-norm rather than
+the F-norm, and yet accurately approximating the 2-norm is a challenge.
+
+In our low-rank approximations, the final computation before
+returning our low-rank approximation was computing a pivoted
+QR factorization.
+A BLAS-3 level QR with Column Pivoting is available
+in LAPACK~\cite{quintana1998blas,anderson1999lapack},
+yet it is well-known that this can fail for some
+matrices~\cite{kahan1966numerical}; % Located on page 35 in PDF!
+this has lead to research into better pivoting
+strategies~\cite{chandrasekaran1994rank,chan1987rank}.
+The best appears to be the Strong Rank-Revealing QR factorization
+from~\cite{gu1996efficient}, yet there is no known
+efficient implementation of this algorithm.
+It would be useful to first develop a BLAS-2, and then BLAS-3, version.
+The main difficulty comes from the fact that the pivoting strategy
+is more involved and requires more communication.
+This required communication is particularly challenging in distributed
+memory machines and there has been work to trade communication
+for flops;
+see~\cite{demmel2015communication,donfack2010adapting,khabou2013lu,
+solomonik2011communication} for some examples.
+Even without this, in problems where there is a hierarchical chain
+of QR factorizations, like those in Randomized
+HSS constructions~\cite{randomHSSLBL},
+better pivoting at the lowest level would lead to smaller ranks overall.
+An implementation of SRRQR would likely require multiple passes:
+the first pass could either be a BLAS-3 QR (not pivoted)
+or BLAS-3 pivoted QR; the second pass could be a blocked
+version of the SRRQR algorithm acting on adjacent panels;
+a final BLAS-2 pass could be performed to check for any final pivots.
+While this would be complicated, it would be useful for the entire
+computing community as rank-revealing QR factorizations are essential.

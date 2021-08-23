@@ -1,0 +1,39 @@
+\chapter{Stopping Criterion for Randomized Low-Rank Approximations}
+\label{chap:random}
+
+There has been work in recent years to understand
+structured matrices: matrices with off-diagonal blocks that
+are (or can be approximated as) low-rank.
+The goal is to develop methods which allow us to compute
+matrix-vector products and matrix inverses faster than
+standard algorithms; that is, multiplication in $O(n\log^{\beta}n)$
+flops and inversion in $O(n^{\alpha}\log^{\beta}n)$ flops
+for $\alpha\in\brackets{1,2}$ and $\beta$ small.
+Another benefit is reduced storage requirements,
+frequently $O(n\log^{\beta}n)$.
+The simplest of these are banded matrices, but also include
+Sequentially Semi-Separable matrices~\cite{chandrasekaran2005some},
+Hierarchically Semi-Separable (HSS)
+matrices~\cite{Chandrasekaran2005HSS,chandrasekaran2006fast},
+H-matrices~\cite{hackbusch1999sparse}, and others.
+Recent work involving randomized HSS construction can be found in
+\cite{martinsson2011fast,rouet2016distributed,ghysels2017robust}.
+The main contribution of this chapter is related to
+a stochastic estimate of $\norm{\cdot}_{F}$ which
+allows us to accurately measure the low-rank approximation
+and determine when it is well-approximated;
+portions of this material first appeared in~\cite{randomHSSLBL}.
+In particular, we develop a method to compute a \emph{relative}
+stopping criterion for an adaptive low-rank approximation.
+
+Throughout this chapter we assume $A\in\R^{m\times n}$
+with rank $r\ll \min(m,n)$.
+For simplicity, we will assume $m\ge n$.
+We let $N(0,1)$ refer to the standard normal distribution
+with mean $0$ and variance $1$.
+Finally, some of the notation in this chapter may conflict with those
+from previous chapters.
+While other adaptive randomized algorithms have frequently used
+an absolute tolerance $\eps$, we will focus on allowing both
+an absolute tolerance $\epsa$ and a relative tolerance $\epsr$.
+

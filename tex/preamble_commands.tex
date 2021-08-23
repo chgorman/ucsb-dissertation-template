@@ -1,0 +1,117 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Preamble: New Commands
+
+% Shorthand for Chebyshev-Vandermonde
+\newcommand{\CV}[0]{C\=/V} % This requires the extdash package
+
+\newcommand{\norm}[1]{\left| \left| #1 \right| \right|}		
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\angles}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\opernorm}[1]{\left|\left|\left| #1 \right| \right| \right|}
+
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\brackets}[1]{\left[ #1 \right]}	
+\newcommand{\braces}[1]{\left\{ #1 \right\}}
+\newcommand{\lprline}[1]{\left. #1 \right|}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Ker}{Ker}
+
+\newcommand{\del}[0]{\delta}
+\newcommand{\eps}[0]{\varepsilon}
+\newcommand{\ego}[0]{\varepsilon > 0}% Let epsilon be greater than 0...
+\newcommand{\vphi}[0]{\varphi}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\Q}[0]{\mathbb{Q}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\C}[0]{\mathbb{C}}
+\newcommand{\E}[0]{\mathbb{E}}
+\newcommand{\V}[0]{\mathbb{V}}
+\renewcommand{\P}[0]{\mathbb{P}} % Overwrites Paragraph symbol
+\newcommand{\RP}[0]{\mathbb{RP}}
+\newcommand{\pdl}[3]{\left.\frac{\partial #1}{\partial #2} \right|_{#3}}
+\newcommand{\dfl}[2]{\left. d #1 \right|_{#2}}
+\newcommand{\csu}[3]{\Gamma_{#1 #2}^{#3}}
+\newcommand{\csl}[3]{\Gamma_{#1 #2 #3}}
+\newcommand{\Ric}[0]{\text{Ric}\,}
+\newcommand{\id}[0]{\text{id}}
+
+\newcommand{\epsa}[0]{\varepsilon_{\text{abs}}}
+\newcommand{\epsr}[0]{\varepsilon_{\text{rel}}}
+
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+\advance\dimen0-0.2\ht0
+\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+
+
+% Increase number of allowable matrix columns
+\setcounter{MaxMatrixCols}{20}
+
+
+%\newtheoremstyle{mythm}% name of the style to be used
+%  {parskip}% measure of space to leave above the theorem. E.g.: 3pt
+%  %{spaceabove}% measure of space to leave above the theorem. E.g.: 3pt
+%  {parskip}% measure of space to leave below the theorem. E.g.: 3pt
+%  %{spacebelow}% measure of space to leave below the theorem. E.g.: 3pt
+%  {}% name of font to use in the body of the theorem
+%  %{bodyfont}% name of font to use in the body of the theorem
+%  {\quad}% measure of space to indent
+%  %{indent}% measure of space to indent
+%  {}% name of head font
+%  %{headfont}% name of head font
+%  {}% punctuation between head and body
+%  %{headpunctuation}% punctuation between head and body
+%  {}% space after theorem head; " " = normal interword space
+%  %{headspace}% space after theorem head; " " = normal interword space
+%  {}
+%  %{\thmname{#1}\thmnumber{ #2}:\thmnote{ #3}}
+%  %{headspec}% Manually specify head
+
+\newtheoremstyle{mythm}% name
+  {12pt}%Space above
+  %{3pt}%Space above
+  {12pt}%Space below
+  {\normalfont}%Body font
+  {0pt}%Indent amount
+  {\bf}% Theorem head font
+  %{\itshape}% Theorem head font
+  {}%Punctuation after theorem head
+  %{.}%Punctuation after theorem head
+  {\newline}%Space after theorem head 2
+  {}%Theorem head spec (can be left empty, meaning ‘normal’)
+
+\theoremstyle{mythm}
+\newtheorem{thm}{Theorem}[chapter] % number by chapter; can replace with section
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{ax}{Axiom}
+\newtheorem{problem}[thm]{Problem}
+%
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[chapter] % number by chapter
+%
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}[chapter]
+\newtheorem*{notation}{Notation}
+%
+\newtheorem{hw}[thm]{Homework}
+
+
+
