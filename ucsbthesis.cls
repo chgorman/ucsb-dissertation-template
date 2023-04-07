@@ -1,13 +1,16 @@
 % Christopher H. Gorman
-% Initial Verions: 1 December 2017
+% Initial Version: 1 December 2017
 %
 % This class is designed to fulfill all of the requirements
 % for the University of California, Santa Barbara
 % dissertation requirements for 2018--2019 academic year.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ucsbthesis}[2017/12/01 UCSB Thesis Class]
+\ProvidesClass{ucsbthesis}[2023/04/07 UCSB Thesis Class]
 
-% Options
+% Class Options
+
+% Font size:
+%       12pt is required for for submssion
 \DeclareOption{10pt}{
     \PassOptionsToClass{\CurrentOption}{book}
 }
@@ -17,6 +20,9 @@
 \DeclareOption{12pt}{
     \PassOptionsToClass{\CurrentOption}{book}
 }
+
+% Paper size:
+%       letterpaper is required for submission
 \DeclareOption{letterpaper}{
     \PassOptionsToPackage{\CurrentOption}{geometry}
 }
@@ -24,6 +30,11 @@
     \PassOptionsToPackage{\CurrentOption}{geometry}
 }
 
+% Formatting:
+%       proper is required for submission;
+%           this option ensures the proper formatting
+%       pretty makes for a more pleasing when writing;
+%           this option is closer to standard LaTeX.
 \DeclareOption{proper}{
     \PassOptionsToClass{oneside}{book}
     \PassOptionsToPackage{top=1in,bottom=1in,left=1.25in,right=1in,
@@ -39,26 +50,37 @@
     \properfalse
 }
 
+% Formatting math:
+%       prettymath ensures single spacing for math equations;
+%       this leads to a more pleasing result.
 \newif\ifprettymath
 \prettymathfalse
 \DeclareOption{prettymath}{
     \prettymathtrue
 }
 
+% Option for Co-Advisors:
+%       use when there are two advisors
 \newif\ifadvisors
 \advisorsfalse
 \DeclareOption{advisors}{
-    % Use if there are two (co-)advisors
     \advisorstrue
 }
 
+% Option for the number of Committee Members:
+%       The standard number of committee members is assumed to be two;
+%       for more members use the options below.
+%       Note that this does not include the advisor or co-advisors.
+%
+%       members3: committee with 3 at-large members
+%       members4: committee with 4 at-large members
+%       members5: committee with 5 at-large members
 \newif\ifmembersthree
 \membersthreefalse
 \DeclareOption{members3}{
     % Use if there are three committee members, not including advisor(s)
     \membersthreetrue
 }
-
 \newif\ifmembersfour
 \membersfourfalse
 \DeclareOption{members4}{
@@ -66,7 +88,6 @@
     \membersthreetrue
     \membersfourtrue
 }
-
 \newif\ifmembersfive
 \membersfivefalse
 \DeclareOption{members5}{
@@ -75,7 +96,6 @@
     \membersfourtrue
     \membersfivetrue
 }
-
 
 % Option Fallback (Failure)
 \DeclareOption*{
@@ -142,7 +162,7 @@
 % Note: when using ``members5'' option, boolean toggles
 % for member3, members4, and member5 are true.
 
-% Header and Footer information
+% Specify Header and Footer information for Front, Main, and Back
 \fancypagestyle{fancyfront}{
     % Header and footer information for front matter
     \fancyhf{}
@@ -150,28 +170,38 @@
     \renewcommand{\footrulewidth}{0pt}
     \cfoot{\thepage}
 }
-
 \fancypagestyle{fancymain}{
-    % Header and footer information for front matter
+    % Header and footer information for main matter
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
     \cfoot{\thepage}
 }
-
 \fancypagestyle{fancyback}{
-    % Header and footer information for front matter
+    % Header and footer information for back matter
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
     \cfoot{\thepage}
 }
 
-% Commands
+
+% Specific commands used within the class file
+
+% Degree Objective:
+%       Degree Name        (Doctor of Philosophy, Master of Arts, or
+%                           Master of Science)
+%       Degree Thesis Name (Dissertation or Thesis)
+%       Degree Major
 \newcommand{\degreeobjective}[3]{\gdef\@degreename{#1}
                                   \gdef\@degreethesisname{#2}
                                   \gdef\@major{#3}}
 
+% Advisor Commands:
+%       advisor
+%
+%       advisorA
+%       advisorB
 \iftoggle{advisors}{
     \newcommand{\advisorA}[2]{\gdef\@advisorAname{#1}
                               \gdef\@advisorAtitle{#2}}
@@ -182,11 +212,20 @@
                               \gdef\@advisortitle{#2}}
 }
 
+% Committee Commands:
+%       committeeA
+%       committeeB
+%
+%   If additional committee members are specified,
+%   then the following options are used:
+%
+%       committeeC
+%       committeeD
+%       committeeE
 \newcommand{\committeeA}[2]{\gdef\@committeeAname{#1}
                              \gdef\@committeeAtitle{#2}}
 \newcommand{\committeeB}[2]{\gdef\@committeeBname{#1}
                              \gdef\@committeeBtitle{#2}}
-
 \iftoggle{members3}{
     \newcommand{\committeeC}[2]{\gdef\@committeeCname{#1}
                                  \gdef\@committeeCtitle{#2}}
@@ -203,31 +242,35 @@
 }{
 }
 
+% Graduation Date:
+%       Grad Month
+%               December for Fall
+%               March for Winter
+%               June for Spring
+%               September for Summer
+%       Grad Year
 \newcommand{\graduationdate}[2]{
     \gdef\@gradmonth{#1}
     \gdef\@gradyear{#2}}
+% Committee Sign Date:
+%       this may be different than Graduation Date
 \newcommand{\committeesignsdate}[2]{
     \gdef\@signmonth{#1}
     \gdef\@signyear{#2}}
+% Dedication: specifies the dedication
 \newcommand{\dedication}[1]{
     \gdef\@dedication{#1}}
+% Acknowledgements: specifies the acknowledgements
 \newcommand{\acknowledgements}[1]{
     \gdef\@acknowledgements{#1}}
+% CV: specifies the CV
 \newcommand{\cv}[1]{
     \gdef\@cv{#1}}
+% Abstract: specifies the abstract
 \newcommand{\abstract}[1]{
     \gdef\@abstract{#1}}
 
-% Note on font sizes:
-%
-% In increasing order, they are
-%
-% tiny, scriptsize, footnotesize, small,
-% normalsize,
-% large, Large, LARGE,
-% huge, Huge
-
-% Title page length
+% Specify the Title page length
 \newlength{\titlepagespacing}
 \setlength{\titlepagespacing}{0.35in}
 
@@ -275,7 +318,7 @@
     \clearpage
 }
 
-% Signature page length
+% Specify the Signature page length
 \newlength{\sigpagespacing}
 \newlength{\sigpagespacingdate}
 \iftoggle{members5}{
@@ -424,7 +467,6 @@
 
 % This looks good for right now but I have not checked to see
 % if it breaks \[ \] or \( \) or anything like that.
-
 \ifprettymath
     \BeforeBeginEnvironment{equation}{\begin{singlespace}}
     \AfterEndEnvironment{equation}{\end{singlespace}\noindent\ignorespaces}
@@ -439,6 +481,5 @@
     \BeforeBeginEnvironment{gather*}{\begin{singlespace}}
     \AfterEndEnvironment{gather*}{\end{singlespace}\noindent\ignorespaces}
 \fi
-
 
 \endinput

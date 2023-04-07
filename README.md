@@ -1,4 +1,4 @@
-# UCSB-Dissertation-Template
+# UCSB Dissertation Template
 
 This document describes all of the files for a doctoral dissertation
 as required by UCSB.
@@ -17,6 +17,19 @@ although he was running a GNU/Linux system, not Mac OS X.
 Because of this, it may be necessary to change some of the margins
 manually, but that will (hopefully) be the only necessary change.
 To do this, look at the `geometry` package.
+
+## General Comments
+
+Some familiarity with LaTeX is assumed when using this template.
+Additionally, the class author encourages users to use
+version control (such as [git](https://git-scm.com/))
+and to host backups on [GitHub](https://github.com/) or
+[GitLab](https://about.gitlab.com/).
+Both GitHub and GitLab have private repositories for users
+to host their dissertation draft.
+The use of version control is invaluable within the software industry
+and it is superior to other methods such as periodically emailing
+copies of the dissertation draft to oneself.
 
 ## Commands with Examples
 
@@ -191,8 +204,8 @@ This class first loads `book.cls` and passes the `letterpaper`
 and `12pt` options.
 This means that we assume letter paper, 12pt font, and all of the
 options standard with the book class. Most importantly, this means
-that `proper` **must** be passed for the doublespacing and
-correct formmatting (correct formatting for the 2018--2019 academic year).
+that `proper` **must** be passed for the double spacing and
+correct formatting (correct formatting for the 2018--2019 academic year).
 
  *  `10pt`, `11pt`, `12pt`
 
@@ -207,14 +220,14 @@ correct formmatting (correct formatting for the 2018--2019 academic year).
  *  `proper`
 
     Causes output to have the correct margins (1.25in left margins,
-    all other 1in), doublespacing, and one-sided printing
+    all other 1in), double spacing, and one-sided printing
     (no even/odd-ness like books).
     This was **required** for the 2018--2019 academic year.
     Note that `proper` and `pretty` are mutually exclusive options.
 
  *  `pretty`
 
-    Causes output to be 1in all around and singlespacing (looks much
+    Causes output to be 1in all around and single spacing (looks much
     better). This was deemed easier-on-the-eyes or ``pretty''
     by the class author.
     Note that `proper` and `pretty` are mutually exclusive options.
@@ -222,10 +235,10 @@ correct formmatting (correct formatting for the 2018--2019 academic year).
  *  `prettymath`
 
     This causes all equation, align, and gather environments (as well
-    as their `*` versions) to be printed singlespaced instead of
-    doublespaced (very important for matrices). As the name implies,
+    as their `*` versions) to be printed single spaced instead of
+    double spaced (very important for matrices). As the name implies,
     it makes the math pretty; that is, the math appears like it would
-    in a standard singlespaced LaTeX document, as well as allows
+    in a standard single spaced LaTeX document, as well as allows
     display math the break over pages (important in some situations).
     
     Note: the class author has **not** checked to see if the above changes
@@ -250,7 +263,7 @@ correct formmatting (correct formatting for the 2018--2019 academic year).
 As currently written, this document uses the `biblatex`
 package for its bibliography.
 Other packages can be used, but you will need to 
-change the appropriate lines of `phd_thesis.tex` to do so.
+change the appropriate lines of `dissertation.tex` to do so.
 
 
 ## Note on advisors and committee members:
@@ -259,7 +272,5 @@ Co-advisors and up to 5 non-advisor committee members seemed
 like the most common and would appear to cover almost everyone.
 If for some reason this does not apply to your doctoral committee,
 please feel free to make the necessary changes to the class yourself.
-I think you have way too many people on your committee,
-but that is not my problem.
 
 Good luck.
